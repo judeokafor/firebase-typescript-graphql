@@ -1,0 +1,1 @@
+#Dont forget to set firebase environment config for production and staging environment

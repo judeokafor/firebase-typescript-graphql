@@ -1,0 +1,29 @@
+{
+	"compilerOptions": {
+		"target": "es2017",
+		"module": "commonjs",
+		"sourceMap": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+		/* Strict Type-Checking Options */
+		"strict": true,
+		"noImplicitAny": false,
+		"noUnusedLocals": true,
+		/* Module Resolution Options */
+		"moduleResolution": "node",
+		"baseUrl": "./src",
+		"noImplicitReturns": true,
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"experimentalDecorators": true,
+		"strictPropertyInitialization": false,
+		"types": ["node", "mocha"],
+		"typeRoots": ["types", "node_modules/@types"],
+		/* Advanced Options */
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"lib": ["es2015"],
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "**/dist/"]
+}
