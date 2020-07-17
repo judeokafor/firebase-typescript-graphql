@@ -2,8 +2,8 @@ import moment from 'moment';
 import { Request, Response, NextFunction } from 'express';
 import { FORBIDDEN, UNAUTHORIZED } from 'http-status-codes';
 
-import utils from 'utils';
-import { User } from 'fireorms';
+import utils from '../utils';
+import { User } from '../fireorms';
 
 const { repository: UserRepo } = User;
 const { normalError, tryCatchError } = utils.errorHandler;

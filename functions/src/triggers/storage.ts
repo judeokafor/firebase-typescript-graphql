@@ -1,8 +1,9 @@
 import * as admin from 'firebase-admin';
 import { runTransaction } from 'fireorm';
-import { User } from 'fireorms';
 
-import utils from 'utils';
+import { User } from '../fireorms';
+
+import utils from '../utils';
 
 const { User: UserModel } = User;
 const { fireStorage } = utils.firebase;

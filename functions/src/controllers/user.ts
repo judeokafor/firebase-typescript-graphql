@@ -2,14 +2,14 @@ import { OK } from 'http-status-codes';
 import { Request, Response } from 'express';
 import { runTransaction } from 'fireorm';
 
-import utils from 'utils';
-import { User } from 'fireorms';
+import utils from '../utils';
+import { User } from '../fireorms';
 
 import { AuthClaimType } from './types';
 
 const { User: UserModel, repository: UserRepo } = User;
 const { errorHandler, successHandler } = utils;
-const { normalError, validationError, tryCatchError } = errorHandler;
+const { tryCatchError } = errorHandler;
 const { successNoData } = successHandler;
 const { admin } = utils.firebase;
 

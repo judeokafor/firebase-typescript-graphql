@@ -5,8 +5,9 @@ import * as fireorm from 'fireorm';
 
 import config from '../config';
 
-const { databaseURL, storageBucket } = JSON.parse(process.env.FIREBASE_CONFIG || '');
 const { adminConfig, firebaseConfig } = config;
+
+const { databaseURL, storageBucket } = firebaseConfig;
 
 admin.initializeApp({
 	credential: admin.credential.cert(adminConfig),
