@@ -4,7 +4,7 @@ import getEnvironmentVariables from './getEnvironmentVariables';
 import googleMaps from './googleMaps';
 import nodemailer from './nodemailer';
 import successHandler from './successHandler';
-import uploadFilesToFirestorage from './uploadFilesToFirestorage';
+import uploadFilesToFireStorage from './uploadFilesToFireStorage';
 
 export default {
 	errorHandler,
@@ -13,5 +13,5 @@ export default {
 	googleMaps,
 	nodemailer,
 	successHandler,
-	uploadFilesToFirestorage,
+	uploadFilesToFireStorage,
 };

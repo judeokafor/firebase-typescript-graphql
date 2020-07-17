@@ -1,20 +1,42 @@
 import { PassThrough } from 'stream';
 
 import firebase from './firebase';
+import { ExportFile } from './types';
 
 const { fireStorage } = firebase;
 
-export type UploadDataType = { fieldname: string; id: string; mimetype: string };
-
-const upload = async (uploadFiles: UploadDataType[], type = 'add') => {
+const uploadStream = uploadData => {
+	const bucket = fireStorage.bucket();
 	const pass = new PassThrough();
+	const { fieldname, mimetype, identityId } = uploadData;
+	const fileName = `${fieldname}/${identityId}`;
+	const bucketFile = bucket.file(fileName);
 
+	const writeStream = bucketFile.createWriteStream({
+		metadata: { contentType: mimetype },
+	});
+
+	pass.pipe(writeStream);
+
+	writeStream.on('error', err => {
+		// TODO: add anaystics on error
+		console.log(err);
+	});
+
+	writeStream.on('finish', () => {
+		// TODO: add anaystics on success
+		console.log(`Successfully uploaded file - ${fileName}`);
+	});
+
+	return pass;
+};
+
+const upload = async (uploadFiles: ExportFile[], id, type = 'add') => {
 	// Handle checking if file already exists
-
 	const bucket = fireStorage.bucket();
 	const uploadFilesToFireStoragePromises = [] as Promise<unknown>[];
 	const checkUploadFilesPromises: Promise<[boolean]>[] = uploadFiles.map(uploadFile => {
-		const { fieldname, id } = uploadFile;
+		const { fieldname } = uploadFile;
 		const fileName = `${fieldname}/${id}`;
 		const bucketFile = bucket.file(fileName);
 
@@ -29,8 +51,7 @@ const upload = async (uploadFiles: UploadDataType[], type = 'add') => {
 			const fileExists = checkFileExistence[index] && checkFileExistence[index][0];
 
 			if (!fileExists || (fileExists && type === 'edit')) {
-				const bucket = fireStorage.bucket();
-				const { fieldname, mimetype, id } = uploadFile;
+				const { fieldname, file, mimetype } = uploadFile;
 				const fileName = `${fieldname}/${id}`;
 				const bucketFile = bucket.file(fileName);
 				const writeStream = bucketFile.createWriteStream({
@@ -49,7 +70,7 @@ const upload = async (uploadFiles: UploadDataType[], type = 'add') => {
 					})
 				);
 
-				pass.pipe(writeStream);
+				file.pipe(writeStream);
 			}
 		});
 	} catch (error) {
@@ -61,4 +82,5 @@ const upload = async (uploadFiles: UploadDataType[], type = 'add') => {
 
 export default {
 	upload,
+	uploadStream,
 };
