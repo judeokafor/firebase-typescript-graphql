@@ -1,12 +1,12 @@
 import moment from 'moment';
 import { Request, Response, NextFunction } from 'express';
-import { FORBIDDEN, INTERNAL_SERVER_ERROR, UNAUTHORIZED } from 'http-status-codes';
+import { FORBIDDEN, UNAUTHORIZED } from 'http-status-codes';
 
 import utils from 'utils';
 import { User } from 'fireorms';
 
 const { repository: UserRepo } = User;
-const { normalError } = utils.errorHandler;
+const { normalError, tryCatchError } = utils.errorHandler;
 const { admin } = utils.firebase;
 
 const authorization = async (req: Request, res: Response, next: NextFunction) => {
@@ -29,7 +29,7 @@ const authorization = async (req: Request, res: Response, next: NextFunction) =>
 
 		return normalError(res, FORBIDDEN, 'Unauthorized');
 	} catch (error) {
-		return normalError(res, INTERNAL_SERVER_ERROR, error.message);
+		return tryCatchError(res, error);
 	}
 };
 
