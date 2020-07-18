@@ -17,7 +17,7 @@ app.use(cors({ origin: true }));
 app.use(morgan('dev'));
 
 //Use Routes Here
-app.use('/api/v1/', routes);
+app.use('/v1/', routes);
 
 //Error Handlers
 app.use((req, res, next) => {
