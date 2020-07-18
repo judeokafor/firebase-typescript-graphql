@@ -1,13 +1,8 @@
-import * as functions from 'firebase-functions';
-
-const { environment } = functions.config().app || {};
-
 const getEnvVariables = () => {
-	const isLocal = environment === 'staging';
-	const isStaging = environment === 'staging';
-	const isProduction = environment === 'production';
+	const isLocal = process.env.NODE_ENV === 'development';
+	const isProduction = process.env.NODE_ENV !== 'development';
 
-	return { isLocal, isProduction, isStaging };
+	return { isLocal, isProduction };
 };
 
 const getAppUrl = () => process.env._APP_URL;

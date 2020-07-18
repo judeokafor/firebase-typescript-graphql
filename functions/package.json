@@ -5,7 +5,7 @@
 		"deploy": "firebase deploy --only functions",
 		"logs": "firebase functions:log",
 		"lint": "eslint --fix src/",
-		"serve": "npm run build && firebase emulators:start --only functions",
+		"serve": "firebase functions:config:get > .runtimeconfig.json && npm run build && firebase emulators:start",
 		"build": "webpack --env.ENVIRONMENT=production --config webpack.config.js --progress",
 		"build:dev": "webpack --watch --env.ENVIRONMENT=development --config webpack.config.js --progress",
 		"test": "mocha -r ts-node/register tests/**/*.test.ts",
