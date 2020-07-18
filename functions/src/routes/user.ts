@@ -5,10 +5,11 @@ import middleware from '../middleware';
 
 const router = express.Router();
 
-const { createNewUser, editUser } = controller.user;
+const { createNewUser, editUser, addOrRemovePropertyFromFavorites } = controller.user;
 const { processFormData, authorization } = middleware;
 
 router.post('/', createNewUser);
 router.put('/:id', authorization, processFormData, editUser);
+router.patch('/:id', authorization, addOrRemovePropertyFromFavorites);
 
 export default router;

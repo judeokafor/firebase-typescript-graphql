@@ -1,4 +1,4 @@
-import { User } from 'fireorms';
+import { User } from '../fireorms';
 const { UserType } = User;
 
 export type AuthClaimType = {
@@ -6,4 +6,13 @@ export type AuthClaimType = {
 	firstName?: string;
 	lastName?: string;
 	uid?: string;
+};
+
+export enum FavoriteType {
+	ADD,
+	REMOVE,
+}
+export type FavoriteData = {
+	favorites: string[];
+	type: FavoriteType;
 };

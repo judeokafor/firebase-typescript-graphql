@@ -23,6 +23,7 @@ export class User {
 	cacNumber?: string;
 	logo?: string;
 	businessName?: string;
+	favoriteProperties?: admin.firestore.FieldValue;
 	createdAt: admin.firestore.Timestamp;
 	updatedAt: admin.firestore.Timestamp = admin.firestore.Timestamp.now();
 }
