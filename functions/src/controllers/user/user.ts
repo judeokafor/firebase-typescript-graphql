@@ -27,22 +27,23 @@ const UserController = {
 	async createNewUser(req: Request, res: Response) {
 		const { uid, firstName, lastName, email, phoneNumber, userType } = req.body;
 
-		const authClaim = { firstName, lastName, uid, userType };
-
 		try {
-			await Promise.all([
-				admin.auth().setCustomUserClaims(uid, authClaim),
-				UserRepo.create({
-					...new UserModel(),
-					id: uid,
-					firstName,
-					lastName,
-					email,
-					phoneNumber,
-					userType,
-					createdAt: admin.firestore.Timestamp.now(),
-				}),
-			]);
+			if (uid) {
+				const authClaim = { firstName, lastName, uid, userType };
+				await Promise.all([
+					admin.auth().setCustomUserClaims(uid, authClaim),
+					UserRepo.create({
+						...new UserModel(),
+						id: uid,
+						firstName,
+						lastName,
+						email,
+						phoneNumber,
+						userType,
+						createdAt: admin.firestore.Timestamp.now(),
+					}),
+				]);
+			}
 
 			return successNoData(res, OK, 'User created successfully');
 		} catch (error) {
