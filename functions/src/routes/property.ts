@@ -13,9 +13,9 @@ const {
 } = controller.property;
 const { processFormData, authorization } = middleware;
 
-router.post('/', /** authorization,*/ processFormData, postProperty);
-router.put('/:id', authorization, processFormData, editProperty);
-router.put('/image/:id', /** authorization,*/ processFormData, handlePropertyImageUpload);
+router.post('/', authorization, postProperty);
+router.put('/:id', authorization, editProperty);
+router.put('/image/:id', authorization, processFormData, handlePropertyImageUpload);
 router.delete('/:id', authorization, deleteExistingProperty);
 
 export default router;

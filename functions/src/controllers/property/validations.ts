@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsArray } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsArray, IsNumber, IsString } from 'class-validator';
 import { Expose } from 'class-transformer';
 import {
 	Currency,
@@ -30,6 +30,7 @@ export class PostPropertyValidation {
 	street: string;
 
 	@IsNotEmpty()
+	@IsNumber()
 	@Expose()
 	price: string;
 
@@ -53,10 +54,11 @@ export class PostPropertyValidation {
 
 	//@TODO: is duration really optional ?
 	@IsOptional()
+	@IsNumber()
 	@Expose()
-	duration: string;
+	duration: number;
 
-	//@TODO: make location import when added google maps auto complete from frontend;
+	//@TODO: make location compulsory when added google maps auto complete from frontend;
 	@IsOptional()
 	@Expose()
 	location: Location;
@@ -116,6 +118,7 @@ export class EditPropertyValidation {
 	street: string;
 
 	@IsOptional()
+	@IsString()
 	@Expose()
 	price: string;
 
@@ -139,8 +142,9 @@ export class EditPropertyValidation {
 
 	//@TODO: is duration really optional ?
 	@IsOptional()
+	@IsNumber()
 	@Expose()
-	duration: string;
+	duration: number;
 
 	//@TODO: make location import when added google maps auto complete from frontend;
 	@IsOptional()
