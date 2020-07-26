@@ -59,6 +59,7 @@ const UserController = {
 	async editUser(req: Request, res: Response) {
 		const userData = req.body;
 		const { uid, firstName, lastName, userType } = userData;
+		const promises = [] as Array<Promise<any>>;
 
 		const authClaimUpdate: AuthClaimType = { uid };
 		if (userType) {
@@ -72,16 +73,19 @@ const UserController = {
 		}
 
 		try {
-			await runTransaction(trans => {
+			await runTransaction(async trans => {
 				const userRepo = trans.getRepository(UserModel);
-				const user = userRepo.findById(uid);
+				const user = await userRepo.findById(uid);
 
-				admin.auth().setCustomUserClaims(uid, authClaimUpdate);
+				promises.push(
+					admin.auth().setCustomUserClaims(uid, authClaimUpdate),
+					userRepo.update({
+						...user,
+						...userData,
+					})
+				);
 
-				return userRepo.update({
-					...user,
-					...userData,
-				});
+				return Promise.all(promises);
 			});
 
 			return successNoData(res, OK, 'User updated successfully');

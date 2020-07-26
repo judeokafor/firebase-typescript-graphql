@@ -58,6 +58,17 @@ const PropertyController = {
 	 *
 	 * @param req Request body
 	 * @param res Response body
+	 * Handles image uploads for property creation existing property;
+	 * image upload is handled in the middleware before this controller
+	 */
+	async handlePropertyImageUpload(req: Request, res: Response) {
+		console.log({ id: req.params.id });
+		return successNoData(res, OK, 'Property updated successfully');
+	},
+	/**
+	 *
+	 * @param req Request body
+	 * @param res Response body
 	 * Handles editing existing property;
 	 * image upload is handled in the middleware before this controller
 	 */

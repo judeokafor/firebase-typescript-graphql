@@ -20,19 +20,25 @@ export default (req, res, next) => {
 		identityId = propertyId || identityId;
 
 		//@TODO: handle multiple image uploads here; assuming the fieldname is called propertyImages
-		// if (fieldname === 'propertyImages') {
-		// }
+		if (fieldname === 'propertyImages') {
+			const uploadData = { fieldname, mimetype, identityId };
 
-		const uploadData = { fieldname, mimetype, identityId };
+			// Upload to firestore
+			file.pipe(uploadStream(uploadData)).on('finish', () => {
+				console.log('WE DONE BUFFERING:', filename);
+			});
+		} else {
+			const uploadData = { fieldname, mimetype, identityId };
 
-		// Upload to firestore
-		file.pipe(uploadStream(uploadData)).on('finish', () => {
-			console.log('WE DONE BUFFERING:', filename);
-		});
+			// Upload to firestore
+			file.pipe(uploadStream(uploadData, 'other')).on('finish', () => {
+				console.log('WE DONE BUFFERING:', filename);
+			});
+		}
 	});
 
 	busboy.on('finish', () => {
-		req.body = { fields };
+		req.body = fields;
 
 		return next();
 	});

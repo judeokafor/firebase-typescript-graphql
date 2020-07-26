@@ -5,11 +5,14 @@ import { ExportFile } from './types';
 
 const { fireStorage } = firebase;
 
-const uploadStream = uploadData => {
+const uploadStream = (uploadData, type = 'propertyImage') => {
 	const bucket = fireStorage.bucket();
 	const pass = new PassThrough();
 	const { fieldname, mimetype, identityId } = uploadData;
-	const fileName = `${fieldname}/${identityId}`;
+	const fileName =
+		type === 'propertyImage'
+			? `${fieldname}/${identityId}-${Date.now()}`
+			: `${fieldname}/${identityId}`;
 	const bucketFile = bucket.file(fileName);
 
 	const writeStream = bucketFile.createWriteStream({

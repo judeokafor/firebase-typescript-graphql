@@ -33,7 +33,7 @@ export class Property {
 	toilets?: RoomNumberType;
 	bathrooms?: RoomNumberType;
 	description?: string;
-	imageUrls?: string[];
+	propertyImages?: admin.firestore.FieldValue;
 	status: Status = Status.AVAILABLE;
 	isArchived = false;
 	additionalInfo?: string;

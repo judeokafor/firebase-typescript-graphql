@@ -48,5 +48,6 @@ export type Location = {
 };
 export enum Features {
 	GARDEN = 'GARDEN',
+	STORE = 'STORE',
 	SWIMMING_POOL = 'SWIMMING POOL',
 } // add more features here

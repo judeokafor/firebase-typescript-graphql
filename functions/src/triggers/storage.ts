@@ -1,11 +1,12 @@
 import * as admin from 'firebase-admin';
 import { runTransaction } from 'fireorm';
 
-import { User } from '../fireorms';
+import { User, Property } from '../fireorms';
 
 import utils from '../utils';
 
 const { User: UserModel } = User;
+const { Property: PropertyModel } = Property;
 const { fireStorage } = utils.firebase;
 
 const generateSignedUrl = async object => {
@@ -25,7 +26,14 @@ const generateSignedUrl = async object => {
 		const userRepo = trans.getRepository(UserModel);
 		const user = await userRepo.findById(identityId);
 		if (!user) {
-			//run for property fields update here;
+			const propertyRepo = trans.getRepository(PropertyModel);
+			const propertyId = identityId.split('-')[0];
+			const property = await propertyRepo.findById(propertyId);
+			return propertyRepo.update({
+				...property,
+				[fieldName]: admin.firestore.FieldValue.arrayUnion(signedUrl),
+				updatedAt: admin.firestore.Timestamp.now(),
+			});
 		}
 
 		return userRepo.update({

@@ -1,4 +1,4 @@
-import { IsEnum, IsDefined, IsOptional } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsArray } from 'class-validator';
 import { Expose } from 'class-transformer';
 import {
 	Currency,
@@ -13,36 +13,36 @@ import {
 } from '../../fireorms/types';
 
 export class PostPropertyValidation {
-	@IsDefined()
+	@IsNotEmpty()
 	@Expose()
 	postedBy: string;
 
-	@IsDefined()
+	@IsNotEmpty()
 	@Expose()
 	state: string;
 
-	@IsDefined()
+	@IsNotEmpty()
 	@Expose()
 	lga: string;
 
-	@IsDefined()
+	@IsNotEmpty()
 	@Expose()
 	street: string;
 
-	@IsDefined()
+	@IsNotEmpty()
 	@Expose()
 	price: string;
 
-	@IsDefined()
+	@IsNotEmpty()
 	@Expose()
 	title: string;
 
-	@IsDefined()
+	@IsNotEmpty()
 	@IsEnum(Purpose)
 	@Expose()
 	purpose: Purpose;
 
-	@IsDefined()
+	@IsNotEmpty()
 	@IsEnum(PropertyUse)
 	@Expose()
 	propertyUse: PropertyUse;
@@ -90,10 +90,10 @@ export class PostPropertyValidation {
 	status: Status;
 
 	@IsOptional()
+	@IsArray()
 	@IsEnum(Features, {
 		each: true,
 	})
-	@IsOptional()
 	@Expose()
 	features: Features[];
 

@@ -9,7 +9,7 @@ const { createNewUser, editUser, addOrRemovePropertyFromFavorites } = controller
 const { processFormData, authorization } = middleware;
 
 router.post('/', createNewUser);
-router.put('/:id', authorization, processFormData, editUser);
+router.put('/:id', /** authorization, */ processFormData, editUser);
 router.patch('/:id', authorization, addOrRemovePropertyFromFavorites);
 
 export default router;
