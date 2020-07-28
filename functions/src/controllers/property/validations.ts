@@ -8,15 +8,10 @@ import {
 	SubPropertyType,
 	RoomNumberType,
 	Status,
-	Features,
 	Location,
 } from '../../fireorms/types';
 
 export class PostPropertyValidation {
-	@IsNotEmpty()
-	@Expose()
-	postedBy: string;
-
 	@IsNotEmpty()
 	@Expose()
 	state: string;
@@ -93,11 +88,11 @@ export class PostPropertyValidation {
 
 	@IsOptional()
 	@IsArray()
-	@IsEnum(Features, {
+	@IsEnum(String, {
 		each: true,
 	})
 	@Expose()
-	features: Features[];
+	features: string[];
 
 	@IsOptional()
 	@IsEnum(Currency)
@@ -180,12 +175,12 @@ export class EditPropertyValidation {
 	status: Status;
 
 	@IsOptional()
-	@IsEnum(Features, {
+	@IsEnum(String, {
 		each: true,
 	})
 	@IsOptional()
 	@Expose()
-	features: Features[];
+	features: string[];
 
 	@IsOptional()
 	@IsEnum(Currency)

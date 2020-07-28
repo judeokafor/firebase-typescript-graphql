@@ -9,7 +9,6 @@ import {
 	SubPropertyType,
 	RoomNumberType,
 	Status,
-	Features,
 	Location,
 } from './types';
 
@@ -37,7 +36,7 @@ export class Property {
 	status: Status = Status.AVAILABLE;
 	isArchived = false;
 	additionalInfo?: string;
-	features?: Features[];
+	features?: string[];
 	createdAt: admin.firestore.Timestamp;
 	updatedAt: admin.firestore.Timestamp = admin.firestore.Timestamp.now();
 }

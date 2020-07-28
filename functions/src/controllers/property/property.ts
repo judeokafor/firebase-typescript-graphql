@@ -75,6 +75,8 @@ const PropertyController = {
 	async editProperty(req: Request, res: Response) {
 		const propertyData = JSON.parse(req.body);
 		const { id: propertyId } = req.params;
+		const { user } = req.body;
+		propertyData.postedBy = user.id;
 		const property = plainToClass(EditPropertyValidation, propertyData);
 
 		try {
