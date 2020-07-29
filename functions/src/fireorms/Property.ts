@@ -3,11 +3,11 @@ import { Collection, getRepository } from 'fireorm';
 
 import {
 	Currency,
-	Purpose,
-	PropertyType,
-	PropertyUse,
-	SubPropertyType,
-	RoomNumberType,
+	// Purpose,
+	// PropertyType,
+	// PropertyUse,
+	// SubPropertyType,
+	// RoomNumberType,
 	Status,
 	Location,
 } from './types';
@@ -22,15 +22,15 @@ export class Property {
 	currency: Currency = Currency.NAIRA;
 	price: string;
 	title: string;
-	purpose: Purpose;
-	propertyUse: PropertyUse;
-	propertyType: PropertyType;
+	purpose: string;
+	propertyUse: string;
+	propertyType: string;
 	location?: Location;
-	subPropertyType?: SubPropertyType;
-	duration?: number;
-	bedrooms?: RoomNumberType;
-	toilets?: RoomNumberType;
-	bathrooms?: RoomNumberType;
+	subPropertyType?: string;
+	duration?: string;
+	bedrooms?: string;
+	toilets?: string;
+	bathrooms?: string;
 	description?: string;
 	propertyImages?: admin.firestore.FieldValue;
 	status: Status = Status.AVAILABLE;

@@ -25,7 +25,7 @@ const UserController = {
 	 * this method assumes that the user has been registered from the frontend and expects the uid sent
 	 */
 	async createNewUser(req: Request, res: Response) {
-		const { uid, firstName, lastName, email, phoneNumber, userType } = JSON.parse(req.body);
+		const { uid, firstName, lastName, email, phoneNumber, userType } = req.body;
 
 		try {
 			if (uid) {
@@ -58,7 +58,7 @@ const UserController = {
 	 * Handles editing user details and updating auth claims;
 	 */
 	async editUser(req: Request, res: Response) {
-		const userData = JSON.parse(req.body);
+		const userData = req.body;
 		const { uid, firstName, lastName, userType } = userData;
 		const promises = [] as Array<Promise<any>>;
 
@@ -101,7 +101,7 @@ const UserController = {
 	 * Handles adding or removing existing property to a user favorites;
 	 */
 	async addOrRemovePropertyFromFavorites(req: Request, res: Response) {
-		const favoritesData = JSON.parse(req.body);
+		const favoritesData = req.body;
 
 		const { favorites, type = FavoriteType.ADD } = favoritesData as FavoriteData;
 		const { id: userId } = req.params;

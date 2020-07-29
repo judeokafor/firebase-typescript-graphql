@@ -2,11 +2,11 @@ import { IsEnum, IsNotEmpty, IsOptional, IsArray, IsNumber, IsString } from 'cla
 import { Expose } from 'class-transformer';
 import {
 	Currency,
-	Purpose,
-	PropertyType,
-	PropertyUse,
-	SubPropertyType,
-	RoomNumberType,
+	// Purpose,
+	// PropertyType,
+	// PropertyUse,
+	// SubPropertyType,
+	// RoomNumberType,
 	Status,
 	Location,
 } from '../../fireorms/types';
@@ -34,24 +34,23 @@ export class PostPropertyValidation {
 	title: string;
 
 	@IsNotEmpty()
-	@IsEnum(Purpose)
+	// @IsEnum(Purpose)
 	@Expose()
-	purpose: Purpose;
+	purpose: string;
 
 	@IsNotEmpty()
-	@IsEnum(PropertyUse)
+	// @IsEnum(PropertyUse)
 	@Expose()
-	propertyUse: PropertyUse;
+	propertyUse: string;
 
-	@IsEnum(PropertyType)
+	// @IsEnum(PropertyType)
 	@Expose()
-	propertyType: PropertyType;
+	propertyType: string;
 
 	//@TODO: is duration really optional ?
 	@IsOptional()
-	@IsNumber()
 	@Expose()
-	duration: number;
+	duration: string;
 
 	//@TODO: make location compulsory when added google maps auto complete from frontend;
 	@IsOptional()
@@ -59,19 +58,19 @@ export class PostPropertyValidation {
 	location: Location;
 
 	@IsOptional()
-	@IsEnum(SubPropertyType)
+	// @IsEnum(SubPropertyType)
 	@Expose()
-	subPropertyType: SubPropertyType;
+	subPropertyType: string;
 
 	@IsOptional()
-	@IsEnum(RoomNumberType)
+	// @IsEnum(RoomNumberType)
 	@Expose()
-	bedrooms: RoomNumberType;
+	bedrooms: string;
 
 	@IsOptional()
-	@IsEnum(RoomNumberType)
+	// @IsEnum(RoomNumberType)
 	@Expose()
-	toilets: RoomNumberType;
+	toilets: string;
 
 	@IsOptional()
 	@Expose()
@@ -122,24 +121,23 @@ export class EditPropertyValidation {
 	title: string;
 
 	@IsOptional()
-	@IsEnum(Purpose)
+	// @IsEnum(Purpose)
 	@Expose()
-	purpose: Purpose;
+	purpose: string;
 
 	@IsOptional()
-	@IsEnum(PropertyUse)
+	// @IsEnum(PropertyUse)
 	@Expose()
-	propertyUse: PropertyUse;
+	propertyUse: string;
 
-	@IsEnum(PropertyType)
+	// @IsEnum(PropertyType)
 	@Expose()
-	propertyType: PropertyType;
+	propertyType: string;
 
 	//@TODO: is duration really optional ?
 	@IsOptional()
-	@IsNumber()
 	@Expose()
-	duration: number;
+	duration: string;
 
 	//@TODO: make location import when added google maps auto complete from frontend;
 	@IsOptional()
@@ -147,19 +145,19 @@ export class EditPropertyValidation {
 	location: Location;
 
 	@IsOptional()
-	@IsEnum(SubPropertyType)
+	// @IsEnum(SubPropertyType)
 	@Expose()
-	subPropertyType: SubPropertyType;
+	subPropertyType: string;
 
 	@IsOptional()
-	@IsEnum(RoomNumberType)
+	// @IsEnum(RoomNumberType)
 	@Expose()
-	bedrooms: RoomNumberType;
+	bedrooms: string;
 
 	@IsOptional()
-	@IsEnum(RoomNumberType)
+	// @IsEnum(RoomNumberType)
 	@Expose()
-	toilets: RoomNumberType;
+	toilets: string;
 
 	@IsOptional()
 	@Expose()
@@ -170,9 +168,9 @@ export class EditPropertyValidation {
 	additionalInfo: string;
 
 	@IsOptional()
-	@IsEnum(Status)
+	// @IsEnum(Status)
 	@Expose()
-	status: Status;
+	status: string;
 
 	@IsOptional()
 	@IsEnum(String, {

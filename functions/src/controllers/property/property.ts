@@ -23,7 +23,7 @@ const PropertyController = {
 	 * image upload is handled in the middleware before this controller
 	 */
 	async postProperty(req: Request, res: Response) {
-		const propertyData = JSON.parse(req.body);
+		const propertyData = req.body;
 		const property = plainToClass(PostPropertyValidation, propertyData);
 
 		try {
@@ -73,7 +73,7 @@ const PropertyController = {
 	 * image upload is handled in the middleware before this controller
 	 */
 	async editProperty(req: Request, res: Response) {
-		const propertyData = JSON.parse(req.body);
+		const propertyData = req.body;
 		const { id: propertyId } = req.params;
 		const { user } = req.body;
 		propertyData.postedBy = user.id;
